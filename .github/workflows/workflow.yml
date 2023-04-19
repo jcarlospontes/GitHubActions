@@ -39,9 +39,10 @@ jobs:
           docker run docker/whalesay cowsay Docker Funcionando $agora
           echo step do docker terminado
         
-      - name: Testando a aplicao do Kelvin
+      - name: Testando a aplicacao do Kelvin
         run: |
           git clone https://github.com/kelvin-alef/react-app.git
           cd ./react-app/
           npm install
           npm test
+          echo step de teste da aplicacao node terminado
