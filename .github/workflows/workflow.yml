@@ -1,24 +1,47 @@
-name: CI
+#Nome do workflow
+name: Atividade Workflow
 
+#Definindo os eventos que ativarão o workflow
 on:
+  #Evento que ativa quando um push é realizado
   push:
-    branches: [ "main" ]
+    #Indica a(s) branch(s) do evento
+    branches: 
+      - main
+  #Evento que ativa quando um pull é realizado
   pull_request:
-    branches: [ "main" ]
-    
+    branches: 
+      - main
+  #Evento que permite a ativação do workflow manualmente
   workflow_dispatch:
   
+#Definindo o(s) conjunto(s) de passos que serão executados no workflow
 jobs:
-  build:
+  #Indica o nome do job
+  primeiro-job:
+    #Indica o ambiente em que o job será executado
     runs-on: ubuntu-latest
-      
+    #Definindo shell scripts ou ações que serão executados dentro do job
     steps:
+      #Executa a versao 3 da ação checkout, tem acesso ao repositório e permite executar ações e scripts(teste e build) no codigo do repositorio
       - uses: actions/checkout@v3
+      #Executa a versao 3 da ação setup-node, permite executar ações com o node
+      - uses: actions/setup-node@v3
+        #Define a versao que sera executada do node
+        with:
+          node-version: 16
       
-      - name: executando docker
-        run: docker run docker/whalesay cowsay alteracao
+      #Indica um nome para o passo
+      - name: Testando Docker
+        #Executa um comando do docker
+        run:
+          agora=$(date)
+          docker run docker/whalesay cowsay Docker Funcionando $agora
+          echo step do docker terminado
         
-      - name: Run a multiline script
+      - name: Testando a aplicao do Kelvin
         run: 
-          echo Add other actions to build,
-          echo test, and deploy your project.
+          git clone https://github.com/kelvin-alef/react-app.git
+          cd ./react-app/
+          npm install
+          npm test
