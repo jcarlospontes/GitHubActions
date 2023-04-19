@@ -34,14 +34,14 @@ jobs:
       #Indica um nome para o passo
       - name: Testando Docker
         #Executa um comando do docker
-        run:
-          agora=$(date),
-          docker run docker/whalesay cowsay Docker Funcionando $agora,
+        run: |
+          agora=$(date)
+          docker run docker/whalesay cowsay Docker Funcionando $agora
           echo step do docker terminado
         
       - name: Testando a aplicao do Kelvin
-        run: 
-          git clone https://github.com/kelvin-alef/react-app.git,
-          cd ./react-app/,
-          npm install,
+        run: |
+          git clone https://github.com/kelvin-alef/react-app.git
+          cd ./react-app/
+          npm install
           npm test
